@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'datos/:id',
+    loadChildren: () => import('./datos/datos.module').then( m => m.DatosPageModule)
+  },
+  {
+    path: 'futbol',
+    loadChildren: () => import('./futbol/futbol.module').then( m => m.FutbolPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>datos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher> 
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button (click)="create()">
+       <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <h3>Bienvenido {{nombre}}</h3>
+   <ion-card *ngFor="let myDatos of datos; let i = index">
+      <ion-card-content>
+        <ion-accordion-group>
+          <ion-accordion value="first">
+            <ion-item slot="header" color="light">
+               <ion-label>{{myDatos.datNombre}} - {{myDatos.datDeporte}}</ion-label>
+               <ion-icon color="primary" (click)="updateDatos(myDatos)" name="pencil-outline"></ion-icon>
+               <ion-icon color="danger" (click)="removeDatos(myDatos.datId)" name="trash-outline"></ion-icon>
+            </ion-item>
+            <div class="ion-padding" slot="content">
+             <div *ngIf="myDatos.datEdad >= 18; else menor">
+                  <img (click) = "interface(i)" src="{{myDatos.datImagen}}"/>
+              </div>
+            </div>
+            <ng-template #menor>
+              <div class="ion-padding" slot="content">
+                  <h1>Menor de edad</h1>
+                  {{myDatos.datNombre}} - {{myDatos.datDeporte}}
+                    <br>
+                    <img (click) = "interface(i)" src="{{myDatos.datImagen}}"/>
+              </div>
+            </ng-template>
+          </ion-accordion>
+        </ion-accordion-group>
+      </ion-card-content>
+  </ion-card>
+</ion-content>
